@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class PasswordManager : MonoBehaviour
 {
-    public TextMeshPro[] displayTexts; // Optional: separate display for input
-    [HideInInspector] public List<ButtonColorChange> buttonDigits = new List<ButtonColorChange>(); // Found in children
+    public TextMeshPro[] displayTexts; 
+    [HideInInspector] public List<ButtonColorChange> buttonDigits = new List<ButtonColorChange>(); 
 
     private List<int> enteredSequence = new List<int>();
     private int currentIndex = 0;
-    private string password = "8432";
+    private string password = "8888";
+
+    public DoorOpener doorOpener; 
+
 
     void Start()
     {
@@ -28,7 +31,6 @@ public class PasswordManager : MonoBehaviour
             }
         }
 
-        // ✅ Find only ButtonColorChange components in children
         ButtonColorChange[] foundButtons = GetComponentsInChildren<ButtonColorChange>(true);
         buttonDigits.AddRange(foundButtons);
         Debug.Log($"Found {buttonDigits.Count} button digits in children.");
@@ -91,8 +93,20 @@ public class PasswordManager : MonoBehaviour
         }
 
         Debug.Log("Password correct!");
+
+        if (doorOpener != null)
+        {
+            Debug.Log("Opening door...");
+            doorOpener.OpenDoor();
+        }
+        else
+        {
+            Debug.LogWarning("DoorOpener not assigned in PasswordManager.");
+        }
+
         yield return null;
     }
+
 
     private IEnumerator ShowRed()
     {
