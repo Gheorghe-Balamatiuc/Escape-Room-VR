@@ -99,8 +99,20 @@ public class PlayVideo : MonoBehaviour
 
     public void TogglePlayStop()
     {
-        bool isPlaying = !videoPlayer.isPlaying;
-        SetPlay(isPlaying);
+        if (index != videoClips.Count - 1 && videoPlayer.isPlaying)
+        {
+            NextClip();
+        }
+        else if (!videoPlayer.isPlaying)
+        {
+            bool isPlaying = !videoPlayer.isPlaying;
+            SetPlay(isPlaying);
+        } else
+        {
+            SetPlay(!videoPlayer.isPlaying);
+            index = 0;
+            videoPlayer.clip = videoClips[0];
+        }
     }
 
     public void TogglePlayPause()
