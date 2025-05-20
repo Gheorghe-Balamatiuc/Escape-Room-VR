@@ -21,7 +21,7 @@ public class PlayVideo : MonoBehaviour
     private MeshRenderer meshRenderer = null;
 
     private int index = 0;
-    private int limit = 3;
+    private int limit = 1;
 
     private void Awake()
     {
