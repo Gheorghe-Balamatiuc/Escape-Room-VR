@@ -10,7 +10,7 @@ public class PasswordManager : MonoBehaviour
 
     private List<int> enteredSequence = new List<int>();
     private int currentIndex = 0;
-    private string password = "8888";
+    private string password = "2876";
 
     public DoorOpener doorOpener; 
 
