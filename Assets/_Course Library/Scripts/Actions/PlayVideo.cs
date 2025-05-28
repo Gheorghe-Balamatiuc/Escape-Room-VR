@@ -21,7 +21,6 @@ public class PlayVideo : MonoBehaviour
     private MeshRenderer meshRenderer = null;
 
     private int index = 0;
-    private int limit = 1;
 
     private void Awake()
     {
@@ -54,17 +53,9 @@ public class PlayVideo : MonoBehaviour
         }
     }
 
-    public void IncreaseLimit()
-    {
-        if (limit < 3)
-            ++limit;
-    }
-
     public void NextClip()
     {
-        index = ++index % limit;
-        Debug.Log(index);
-        videoPlayer.clip = videoClips[index];
+        index = ++index % videoClips.Count;
         Play();
     }
 
@@ -106,20 +97,8 @@ public class PlayVideo : MonoBehaviour
 
     public void TogglePlayStop()
     {
-        if (index != limit - 1 && videoPlayer.isPlaying)
-        {
-            NextClip();
-        }
-        else if (!videoPlayer.isPlaying)
-        {
-            bool isPlaying = !videoPlayer.isPlaying;
-            SetPlay(isPlaying);
-        } else
-        {
-            SetPlay(!videoPlayer.isPlaying);
-            index = 0;
-            videoPlayer.clip = videoClips[0];
-        }
+        bool isPlaying = !videoPlayer.isPlaying;
+        SetPlay(isPlaying);
     }
 
     public void TogglePlayPause()
